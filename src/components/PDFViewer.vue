@@ -1,11 +1,9 @@
 <template>
   <v-container fluid>
     <v-slide-y-transition mode="out-in">
-      <v-layout column align-center>
-        <div id="viewerContainer">
-            <div id="viewer"></div>
+        <div id="viewerContainer" class="pdfViewer">
+            <div id="viewer" class="pdfViewer" align="center"></div>
         </div>
-      </v-layout>
     </v-slide-y-transition>
   </v-container>
 </template>
@@ -20,7 +18,8 @@ PDFJS.cMapUrl = "../../node_modules/pdfjs-dist/cmaps/";
 PDFJS.cMapPacked = true;
 console.log(PDFJS);
 
-var DEFAULT_URL ="/static/list-instrument_3a88fa884e22e7fc9e74234807c3bd59e212a9b9_226213962.pdf";
+var DEFAULT_URL =
+  "/static/list-instrument_3a88fa884e22e7fc9e74234807c3bd59e212a9b9_226213962.pdf";
 var DEFAULT_SCALE_DELTA = 1.1;
 var MIN_SCALE = 0.25;
 var MAX_SCALE = 10.0;
@@ -129,7 +128,7 @@ export default {
       linkService: linkService,
       l10n: this.l10n,
       useOnlyCssZoom: USE_ONLY_CSS_ZOOM,
-      textLayerMode: TEXT_LAYER_MODE,
+      textLayerMode: TEXT_LAYER_MODE
     });
     this.pdfViewer = pdfViewer;
     // console.log(this.pdfViewer);
@@ -140,17 +139,15 @@ export default {
     });
     linkService.setHistory(this.pdfHistory);
 
-    
     this.openPDF({
       url: DEFAULT_URL
     });
-
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 h1,
 h2 {
   font-weight: normal;
@@ -165,5 +162,37 @@ li {
 }
 a {
   color: #42b983;
+}
+
+#viewerContainer {
+  position: absolute;
+  overflow: auto;
+  width: 100%;
+  top: 5rem;
+  bottom: 4rem;
+  left: 0;
+  right: 0;
+}
+
+.pdfViewer .canvasWrapper {
+  overflow: hidden;
+}
+
+.pdfViewer .page {
+  direction: ltr;
+  width: 816px;
+  height: 1056px;
+  margin: 10px auto 10px auto;
+  position: relative;
+  overflow: visible;
+  border: 9px solid transparent;
+  background-clip: content-box;
+  background-color: grey;
+}
+
+.pdfViewer .page canvas {
+  margin: 0;
+  display: block;
+  background-color: grey;
 }
 </style>
