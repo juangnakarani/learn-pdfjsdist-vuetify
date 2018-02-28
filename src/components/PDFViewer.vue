@@ -20,12 +20,13 @@ PDFJS.cMapUrl = "../../node_modules/pdfjs-dist/cmaps/";
 PDFJS.cMapPacked = true;
 console.log(PDFJS);
 
-var DEFAULT_URL ="/static/Red_Hat_Enterprise_Linux-7-System_Administrators_Guide-en-US.pdf";
+var DEFAULT_URL ="/static/list-instrument_3a88fa884e22e7fc9e74234807c3bd59e212a9b9_226213962.pdf";
 var DEFAULT_SCALE_DELTA = 1.1;
 var MIN_SCALE = 0.25;
 var MAX_SCALE = 10.0;
 var DEFAULT_SCALE_VALUE = "auto";
-
+var USE_ONLY_CSS_ZOOM = true;
+var TEXT_LAYER_MODE = 0; // DISABLE
 var PDFViewerApplication = {
   pdfLoadingTask: null,
   pdfDocument: null,
@@ -126,7 +127,9 @@ export default {
     var pdfViewer = new PDFJS.PDFViewer({
       container: container,
       linkService: linkService,
-      l10n: this.l10n
+      l10n: this.l10n,
+      useOnlyCssZoom: USE_ONLY_CSS_ZOOM,
+      textLayerMode: TEXT_LAYER_MODE,
     });
     this.pdfViewer = pdfViewer;
     // console.log(this.pdfViewer);
